@@ -14,121 +14,55 @@
  limitations under the License.
 -->
 
-# PIXKIT开源自动驾驶开发教学套件
-## Pixmoving Inc
+# Pixmoving Inc
 
-### Who Are We
-[PIX Moving](http://www.pixmoving.city)选择从零开始打造全新产业生态，由来自“中国、意大利、印度、日本、巴基斯坦、美国”等全球6个国家的近200名喜欢冒险的天才组成。我们从研发自动驾驶“滑板底盘”开始，因为它是铺平智能汽车规模化应用的基石，也是未来城市的基础设施。同时，PIX自主开发了屡获殊荣的大型金属3D打印系统、无模具成型系统、复合材料成型技术，结合PIX独有的车辆参数化设计算法，成功减少了60%的汽车零部件及装配工作，让产品开发者能够使用PIX滑板底盘及工具快速完成产品开发及制造。PIX被汽车产业誉为下一代汽车制造的灯塔工厂，并成为数字工业巨头Autodesk公司全球创新合作伙伴。
+## Who Are We
+[PIX Moving](http://www.pixmoving.city)成立于2017年，是全球城市机器人的开创者，核心产品有Robo-Bus、Robo-Shop、Robo-EV、Robo-Sweep等机器人，目前产品进入到欧洲、北美、南美、东南亚以及日韩等全球30多个国家。团队成员200多人，来自意大利、美国、印度以及日本等7个国家，研发人员占比超过58%。技术创新是PIX快速发展的核心动力，目前已在中国、欧洲、美国申请专利200多项，因此，也被达沃斯论坛评选为"全球100家最具发展潜力的技术先锋企业"，中国有12家企业上榜。截止目前，PIX已经获得硅谷风险投资基金SOSV、日本上市公司TIS株式会社以及中国A股上市公司勘设股份等投资。
 
-## PIXKIT
-![pixkit-architecture](./images/pixkit-architecture.jpg)
+![pix-offerings.png](./images/pix-offerings.png)
 
-- 提供一站式自动驾驶开发解决方案，为客户提供0-1的自动驾驶开发平台
-- 为客户完成计算平台、线控底盘、传感器与自动驾驶系统的集成，让客户专注于算法开发
-- 提供地图与传感器标定工具链，降低开发门槛
-- 开源所有源代码并提供详细的文档，让开发更得心应手
-- 持续更新、迭代软件与算法，保持技术前沿
-- 得益于ROS/Autoware的社区资源，为开发提供源源不断动力
-- 提供不同ODD示例，将Autoware拓展到不同场景（后续提供支持）
+## Robo-Bus小巴
+- 城市有机体：以圆润和谐的设计美学塑造具有未来感且赏心悦目的外观。以贴近与人的细节感知，为乘客塑造安全与舒适的出行体验;
+- 多场景适配：可根据场景的变化适配车辆配置和技术方案;
+- 多重安全冗余：以安全为首位，致力于为乘客提供舒适多元的通勤体验;
+- 云平台：运营平台涵盖在线车队管理，数据监控，固件升级等30＋功能；
+- 双向设计：双向设计，前后对称环形大灯配合简约舒适内饰带来全新体验；
+- 智慧出行：车内智能交互系统，轻松一键出行，车速路线实时掌控；
+- L4级自动驾驶：多传感器融合，为不同场景的自动驾驶保驾护航
+                     
+![pix-robobus](./images/pix-robobus.png)
 
-### 硬件构成
+### 自动驾驶系统构成 
 
-#### 1.[纯电开源Pix Ultra-Skateboard线控底盘](http://www.pixmoving.city/?page_id=673)
-![pix-chassis](./images/pix-chassis.jpg)
-#### 2.传感器套件及模块化支架
-![pixkit-sensors](./images/pixkit-sensors.jpg)
-#### 3.底盘工业遥控器
-![remote-controller](./images/remote-controller.jpg)
+#### 1.传感器套件
+- 车辆出口多个国家，当您收到车辆时传感器可能存在差异，请以实物为标准
 
-### 自动驾驶开发工具链
-#### 传感器标定
-- [camera内参标定](./%E4%BC%A0%E6%84%9F%E5%99%A8%E6%A0%87%E5%AE%9A/camera%E5%86%85%E5%8F%82%E6%A0%87%E5%AE%9A.md)
-````yaml
-image_width: 1920
-image_height: 1080
-camera_name: trafficlight
-camera_matrix:
-  rows: 3
-  cols: 3
-  data: [1010.2744 ,    0.     ,  941.65588,
-            0.     , 1008.70001,  517.61131,
-            0.     ,    0.     ,    1.     ]
-distortion_model: plumb_bob
-distortion_coefficients:
-  rows: 1
-  cols: 5
-  data: [-0.336502, 0.091380, -0.001975, 0.000444, 0.000000]
-rectification_matrix:
-  rows: 3
-  cols: 3
-  data: [1., 0., 0.,
-         0., 1., 0.,
-         0., 0., 1.]
-projection_matrix:
-  rows: 3
-  cols: 4
-  data: [723.01111,   0.     , 947.26543,   0.     ,
-           0.     , 895.51398, 508.08632,   0.     ,
-           0.     ,   0.     ,   1.     ,   0.     ]
-````
-- [LiDAR-camera外参标定](./%E4%BC%A0%E6%84%9F%E5%99%A8%E6%A0%87%E5%AE%9A/LiDAR-camera%E6%A0%87%E5%AE%9A.md)
-```yaml
-rs162camera:
-  x: 0.5789871
-  y: -0.08247789
-  z: -0.3453706
-  roll: -1.55877693
-  pitch: 0.00713767
-  yaw: -1.55820481
-```
-![camera-lidar-calibration](./%E4%BC%A0%E6%84%9F%E5%99%A8%E6%A0%87%E5%AE%9A/image/lidar2camera/cali_result.jpg)
-- [IMU标定](./%E4%BC%A0%E6%84%9F%E5%99%A8%E6%A0%87%E5%AE%9A/IMU%E6%A0%87%E5%AE%9A.md)
-```yaml
-Gyr:
-    unit: " rad/s"
-    avg-axis:
-    gyr_n: 1.5059072284923697e-03
-    gyr_w: 4.3430855283551206e-05
-    x-axis:
-    gyr_n: 1.6901233770452774e-03
-    gyr_w: 5.0850707578827144e-05
-    y-axis:
-    gyr_n: 1.3392742394140514e-03
-    gyr_w: 3.7654685426892668e-05
-    z-axis:
-    gyr_n: 1.4883240690177805e-03
-    gyr_w: 4.1787172844933785e-05
-Acc:
-    unit: " m/s^2"
-    avg-axis:
-    acc_n: 5.9215155351791055e-03
-    acc_w: 1.3379378640306186e-04
-    x-axis:
-    acc_n: 6.0017230453598448e-03
-    acc_w: 1.0726720420556991e-04
-    y-axis:
-    acc_n: 6.7689914243794181e-03
-    acc_w: 1.6961241589651517e-04
-    z-axis:
-    acc_n: 4.9938321357980535e-03
-    acc_w: 1.2450173910710051e-04
-```
+![robobus-sensors](./images/robobus-sensors.png)
 
-#### 高精度地图制作
-- [点云地图](./%E5%9C%B0%E5%9B%BE/%E7%82%B9%E4%BA%91%E5%9C%B0%E5%9B%BE.md)
+#### 2.交互平台
+- 车载大屏:显示车辆状态信息
+
+![robobus-interfance1](./images/robobus-interfance11.png)
+- 操控界面：人机交互，安全员操作界面
+
+![robobus-interfance2](./images/robobus-interfance3.png)
+
+#### 3.高精度地图制作
+- 点云地图
+
 ![pointcloud-map](./images/pointcloud-map.jpg)
-- [Lanelet2地图](./%E5%9C%B0%E5%9B%BE/lanelet2%E5%9C%B0%E5%9B%BE.md)
+- Lanelet2地图
+
 ![lanelet2-map](./images/lanelet2-map.jpg)
 
 ### 自动驾驶软硬件文档支持
-- [硬件集成](./%E7%A1%AC%E4%BB%B6%E5%AE%89%E8%A3%85/index.md)
-- [pix底盘使用手册](./pix%E5%BA%95%E7%9B%98%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/index.md)
-- [传感器标定](./%E4%BC%A0%E6%84%9F%E5%99%A8%E6%A0%87%E5%AE%9A/camera%E5%86%85%E5%8F%82%E6%A0%87%E5%AE%9A.md)
-- [地图制作](./%E5%9C%B0%E5%9B%BE/index.md)
-- [Autoware教学](./Autoware%E4%B8%8A%E6%89%8B/%E5%90%AF%E5%8A%A8autoware.md)
+- [Robo-Bus用户说明书](./Robo-Bus用户说明书/)
+- [自动驾驶传感器硬件检查](./自动驾驶传感器硬件检查/)
+- [高精度地图数据采集](./高精度地图数据采集/)
+- [Robo-Bus自动驾驶运营](./Robo-Bus自动驾驶运营/)
 
 ## 联系我们
-对PIX或我们所提供的产品感兴趣？请随时与我们取得联系。 
+RoboBus是由PIX Moving打造的纯电动线控无人巴士，支持遥控器驾驶和自动驾驶双重驾驶模式。如使用过程中您需要咨询任何问题，请联系PIX Moving售后服务中心以获取最新的售后服务。对PIX或我们所提供的产品感兴趣，请随时与我们取得联系。 
 PIX 期待与全球跨领域的企业、组织、先行者们建立合作，共同致力于汽车产业与城市的创新变革。
 
 - 生态合作：<chase@pixmoving.com>
@@ -136,4 +70,4 @@ PIX 期待与全球跨领域的企业、组织、先行者们建立合作，共�
 - 媒体报道：<yoki@pixmoving.com>
 - 获得更多关于产品的信息：
 
-![qr-code](./images/qr-code.png)
+![E-mail](./images/E-mail2.png)
